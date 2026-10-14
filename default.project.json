@@ -23,9 +23,22 @@
 					}
 				},
 				"core": {
+					"$className": "Folder",
 					"$ignoreUnknownInstances": false,
-					"$path": {
-						"optional": "src/core/server"
+					"PlayerState": {
+						"$path": {
+							"optional": "src/core/PlayerStateServer.luau"
+						}
+					}
+				},
+				"features": {
+					"$className": "Folder",
+					"$ignoreUnknownInstances": false,
+					"plot": {
+						"$ignoreUnknownInstances": false,
+						"$path": {
+							"optional": "src/features/plot"
+						}
 					}
 				}
 			}
@@ -46,9 +59,12 @@
 						}
 					},
 					"core": {
+						"$className": "Folder",
 						"$ignoreUnknownInstances": false,
-						"$path": {
-							"optional": "src/core/client"
+						"PlayerState": {
+							"$path": {
+								"optional": "src/core/PlayerStateClient.luau"
+							}
 						}
 					}
 				}
