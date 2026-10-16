@@ -26,21 +26,13 @@ function Plot.New(player: Player): Plot?
 		return nil
 	end
 
-	local model = PlotBuilder.Build(spawn, player)
-
-	local playerSpawn = model:FindFirstChild(PlotConfig.PlayerSpawnName, true) :: BasePart?
-
-	if playerSpawn then
-		playerSpawn.Transparency = 1
-	else
-		warn(`[Plot] {model.Name} has no "{PlotConfig.PlayerSpawnName}" part, using the plot spawn`)
-	end
+	local model, playerSpawn = PlotBuilder.Build(spawn, player)
 
 	local self = setmetatable({
 		Owner = player :: Player?,
 		Spawn = spawn,
 		Model = model,
-		PlayerSpawn = playerSpawn or spawn,
+		PlayerSpawn = playerSpawn,
 		_janitor = Janitor.new(),
 	}, Plot)
 

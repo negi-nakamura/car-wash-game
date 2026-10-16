@@ -12,6 +12,7 @@ local function AssignPlot(player: Player)
 	end
 
 	local plot = Plot.New(player)
+
 	if not plot then
 		warn(`[PlotService] No free plot for {player.Name}`)
 		return
@@ -22,6 +23,7 @@ end
 
 local function ReleasePlot(player: Player)
 	local plot = PlotByPlayer[player]
+	
 	if not plot then
 		return
 	end
