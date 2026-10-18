@@ -8,6 +8,14 @@ local CashierService = {}
 
 function CashierService.Init()
 	CustomerService.CustomerStopped:Connect(function(customer, pointName: string)
+		if pointName == CustomerConfig.LaneExitPoint
+			or pointName == CustomerConfig.LaneExitCheckPoint
+			or pointName == CustomerConfig.LaneRejoinPoint
+		then
+			customer:Continue()
+			return
+		end
+
 		if pointName ~= CashierConfig.StopName then
 			return
 		end

@@ -69,7 +69,7 @@ function SpawnCustomer(plot: Plot.Plot, state: PlotCustomers)
 		state.Queue:Departed(customer, pointName)
 
 		-- The front customer left, so the queue has room again
-		if pointName == CustomerConfig.QueuePoints[1] then
+		if pointName == CustomerConfig.LaneExitCheckPoint then
 			ScheduleSpawn(plot, state)
 		end
 	end)

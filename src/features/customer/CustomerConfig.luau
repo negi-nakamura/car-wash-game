@@ -22,13 +22,17 @@ return table.freeze({
 	-- Cashier lane
 	LaneBuilding = "CashierLane", -- building that holds the lane points
 	LaneEntrancePoint = "LaneEntrance", -- where cars turn off the highway into the lane
+	LaneExitPoint = "CashierExit", -- where rejected cars leave the queue
+	LaneExitCheckPoint = "CashierExitCheck", -- where rejected cars trigger queue advancement
+	LaneRejoinPoint = "RejectRejoin", -- where rejected cars finish leaving the queue
 	QueuePoints = { "CashierStop", "Queue2", "Queue3" }, -- parking points in the lane, the front of the queue first
 
 	-- Routes: Building = building name, Point = part name inside it, Stop = true to wait there.
 	-- An entry without Building is a point inside Workspace.Highway.
 	RejectRoute = {
-		{ Building = "CashierLane", Point = "CashierExit" },
-		{ Building = "CashierLane", Point = "RejectRejoin" },
+		{ Building = "CashierLane", Point = "CashierExit", Stop = true },
+		{ Building = "CashierLane", Point = "CashierExitCheck", Stop = true },
+		{ Building = "CashierLane", Point = "RejectRejoin", Stop = true },
 		{ Point = "End" },
 	}, -- from the front of the queue back out to Highway End
 })

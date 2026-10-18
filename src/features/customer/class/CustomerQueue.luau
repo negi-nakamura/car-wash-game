@@ -41,6 +41,13 @@ end
 
 -- The customer parked on a queue point; if a slot ahead is free, move forward
 function CustomerQueue:Parked(customer: Customer.Customer, pointName: string)
+	if pointName == CustomerConfig.LaneExitPoint
+		or pointName == CustomerConfig.LaneExitCheckPoint
+		or pointName == CustomerConfig.LaneRejoinPoint
+	then
+		return
+	end
+
 	self._ParkedAt[customer] = pointName
 	self:_Advance()
 end
@@ -49,7 +56,7 @@ end
 function CustomerQueue:Departed(customer: Customer.Customer, pointName: string)
 	self._ParkedAt[customer] = nil
 
-	if pointName == CustomerConfig.QueuePoints[1] then
+	if pointName == CustomerConfig.LaneExitCheckPoint then
 		table.remove(self._Line, table.find(self._Line, customer))
 		self:_Advance()
 	end
