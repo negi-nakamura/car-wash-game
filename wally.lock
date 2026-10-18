@@ -8,9 +8,9 @@ version = "1.19.2"
 dependencies = []
 
 [[package]]
-name = "christian/kar-wash"
+name = "christian/car-wash-game"
 version = "0.1.0"
-dependencies = [["bridgenet2", "ffrostflame/bridgenet2@1.0.0"], ["janitor", "howmanysmall/janitor@1.18.3"], ["playerstate", "bellaouzo/playerstate@1.19.2"], ["react", "jsdotlua/react@17.2.1"], ["react-roblox", "jsdotlua/react-roblox@17.2.1"], ["sift", "csqrl/sift@0.0.11"], ["signals", "roblox/signals@0.8.0"], ["ui-labs", "pepeeltoro41/ui-labs@2.4.2"], ["zoneplus", "mattschrubb/zoneplus@3.2.0"]]
+dependencies = [["bridgenet2", "ffrostflame/bridgenet2@1.0.0"], ["janitor", "howmanysmall/janitor@1.18.3"], ["playerstate", "bellaouzo/playerstate@1.19.2"], ["react", "jsdotlua/react@17.2.1"], ["react-roblox", "jsdotlua/react-roblox@17.2.1"], ["sift", "csqrl/sift@0.0.11"], ["signal", "sleitnick/signal@2.0.3"], ["signals", "roblox/signals@0.8.0"], ["ui-labs", "pepeeltoro41/ui-labs@2.4.2"], ["zoneplus", "mattschrubb/zoneplus@3.2.0"]]
 
 [[package]]
 name = "csqrl/sift"
@@ -151,3 +151,8 @@ dependencies = []
 name = "roblox/signals"
 version = "0.8.0"
 dependencies = [["React", "jsdotlua/react@17.2.1"]]
+
+[[package]]
+name = "sleitnick/signal"
+version = "2.0.3"
+dependencies = []

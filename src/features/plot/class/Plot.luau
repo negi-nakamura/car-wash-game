@@ -14,7 +14,7 @@ export type Plot = typeof(setmetatable(
 		Spawn: BasePart,
 		Model: Model,
 		PlayerSpawn: BasePart,
-		_janitor: typeof(Janitor.new()),
+		Janitor: typeof(Janitor.new()),
 	},
 	Plot
 ))
@@ -33,12 +33,12 @@ function Plot.New(player: Player): Plot?
 		Spawn = spawn,
 		Model = model,
 		PlayerSpawn = playerSpawn,
-		_janitor = Janitor.new(),
+		Janitor = Janitor.new(),
 	}, Plot)
 
-	self._janitor:Add(self.Model, "Destroy")
+	self.Janitor:Add(self.Model, "Destroy")
 
-	self._janitor:Add(player.CharacterAdded:Connect(function(character: Model)
+	self.Janitor:Add(player.CharacterAdded:Connect(function(character: Model)
 		self:_Teleport(character)
 	end), "Disconnect")
 
@@ -51,7 +51,7 @@ end
 
 function Plot:Destroy()
 	self.Owner = nil
-	self._janitor:Destroy()
+	self.Janitor:Destroy()
 	PlotSpawnAllocator.Release(self.Spawn)
 end
 

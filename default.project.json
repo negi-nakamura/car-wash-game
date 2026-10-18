@@ -32,13 +32,9 @@
 					}
 				},
 				"features": {
-					"$className": "Folder",
 					"$ignoreUnknownInstances": false,
-					"plot": {
-						"$ignoreUnknownInstances": false,
-						"$path": {
-							"optional": "src/features/plot"
-						}
+					"$path": {
+						"optional": "src/features"
 					}
 				}
 			}
