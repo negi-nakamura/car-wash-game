@@ -9,7 +9,6 @@ local CashierService = {}
 function CashierService.Init()
 	CustomerService.CustomerStopped:Connect(function(customer, pointName: string)
 		if pointName == CustomerConfig.LaneExitPoint
-			or pointName == CustomerConfig.LaneExitCheckPoint
 			or pointName == CustomerConfig.LaneRejoinPoint
 		then
 			customer:Continue()
@@ -20,9 +19,11 @@ function CashierService.Init()
 			return
 		end
 
-		-- Test timer: reject the front customer, later this is where the order and payment happen
-		task.delay(CashierConfig.DecisionSeconds, function()
-			if not customer.Destroyed then
+		customer:StartWaiting(CustomerConfig.QueueWaitSeconds)
+
+		-- Wait for the customer's queue timer to finish before sending them out.
+		task.delay(customer:GetWaitingRemaining(), function()
+			if not customer.Destroyed and customer:IsWaiting() and customer:GetWaitingRemaining() <= 0 then
 				customer:Follow(CustomerConfig.RejectRoute)
 			end
 		end)

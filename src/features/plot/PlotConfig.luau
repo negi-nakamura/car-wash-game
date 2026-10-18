@@ -14,6 +14,8 @@ return table.freeze({
 
 	-- Cloned plot model
 	ModelNameFormat = "%s's Plot", -- model name, formatted with the player's name
+	TemporaryPlotName = "TemporaryPlot", -- ServerStorage.Assets.Plots asset shown on unclaimed spawns
+	TemporaryPlotRotationOffset = 180, -- the temporary asset's buildings are authored backwards
 	PlayerSpawnName = "PlayerSpawn", -- name of the part inside the Plot template where the owner spawns,
 
 	-- Teleport

@@ -29,6 +29,33 @@ function CustomerQueue:IsFull(): boolean
 	return #self._Line >= #CustomerConfig.QueuePoints
 end
 
+function CustomerQueue:IsEmpty(): boolean
+	return #self._Line == 0
+end
+
+function CustomerQueue:GetFront(): Customer.Customer?
+	return self._Line[1]
+end
+
+function CustomerQueue:GetCustomers(): { Customer.Customer }
+	return table.clone(self._Line)
+end
+
+function CustomerQueue:IsParked(customer: Customer.Customer): boolean
+	return self._ParkedAt[customer] ~= nil
+end
+
+function CustomerQueue:Remove(customer: Customer.Customer)
+	local index = table.find(self._Line, customer)
+	if not index then
+		return
+	end
+
+	table.remove(self._Line, index)
+	self._ParkedAt[customer] = nil
+	self:_Advance()
+end
+
 -- Take the back slot and drive there from the lane entrance
 function CustomerQueue:Join(customer: Customer.Customer)
 	table.insert(self._Line, customer)
@@ -49,6 +76,7 @@ function CustomerQueue:Parked(customer: Customer.Customer, pointName: string)
 	end
 
 	self._ParkedAt[customer] = pointName
+	customer:StartWaiting(CustomerConfig.QueueWaitSeconds)
 	self:_Advance()
 end
 
@@ -69,7 +97,7 @@ function CustomerQueue:_Advance()
 		local parkedAt = self._ParkedAt[customer]
 
 		if parkedAt and parkedAt ~= slot then
-			customer:Follow({ QueueEntry(slot) })
+			customer:Follow({ QueueEntry(slot) }, true)
 		end
 	end
 end

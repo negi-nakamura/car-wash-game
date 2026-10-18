@@ -1,0 +1,16 @@
+return table.freeze({
+	BuildingName = "CarWash",
+	GarageDoorName = "GarageDoor",
+	WashbayNamePrefix = "Washbay",
+	PointsFolderName = "Points",
+	EntrancePointName = "WashbayEntrance",
+	CleaningPointName = "WashbayStop",
+	ExitPointName = "WashbayExit",
+	HighwayRejoinPointName = "HighwayRejoin",
+	PromptAnchorName = "WashPromptAnchor",
+	PromptName = "WashCustomerPrompt",
+	PromptActionText = "Wash Customer",
+	PromptObjectText = "Car Wash",
+	PromptHoldDuration = 0.5,
+	CleaningSeconds = 15,
+})

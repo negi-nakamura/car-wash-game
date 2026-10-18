@@ -6,11 +6,23 @@ local BuildingTemplates = ServerStorage:WaitForChild("Assets"):WaitForChild(Buil
 
 local BuildingBuilder = {}
 
-local function GetLowestY(model: Model, pointsFolder: Instance?): number
+local function IsPointPart(part: BasePart, model: Model): boolean
+	local ancestor = part.Parent
+	while ancestor and ancestor ~= model do
+		if ancestor.Name == BuildingConfig.PointsFolderName then
+			return true
+		end
+		ancestor = ancestor.Parent
+	end
+
+	return false
+end
+
+local function GetLowestY(model: Model): number
 	local lowestY = math.huge
 
 	for _, part in model:GetDescendants() do
-		if not part:IsA("BasePart") or (pointsFolder and part:IsDescendantOf(pointsFolder)) then
+		if not part:IsA("BasePart") or IsPointPart(part, model) then
 			continue
 		end
 
@@ -36,8 +48,7 @@ function BuildingBuilder.Build(plotModel: Model, buildingName: string): Model
 
 	local model = (BuildingTemplates:FindFirstChild(buildingName) :: Model):Clone()
 
-	local pointsFolder = model:FindFirstChild(BuildingConfig.PointsFolderName)
-	local pivotToBottom = GetLowestY(model, pointsFolder) - model:GetPivot().Position.Y
+	local pivotToBottom = GetLowestY(model) - model:GetPivot().Position.Y
 
 	model:PivotTo(spawn.CFrame * CFrame.new(0, spawn.Size.Y / 2 - pivotToBottom, 0))
 	model.Parent = buildingsFolder

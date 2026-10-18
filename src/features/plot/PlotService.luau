@@ -3,6 +3,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Signal = require(ReplicatedStorage.Packages.signal)
 local Plot = require(script.Parent.class.Plot)
+local PlotSpawnAllocator = require(script.Parent.modules.PlotSpawnAllocator)
 
 local PlotService = {}
 
@@ -40,6 +41,7 @@ function PlotService.GetPlot(player: Player): Plot.Plot?
 end
 
 function PlotService.Init()
+	PlotSpawnAllocator.Init()
 	Players.PlayerAdded:Connect(AssignPlot)
 	Players.PlayerRemoving:Connect(ReleasePlot)
 
